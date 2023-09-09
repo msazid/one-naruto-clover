@@ -1,8 +1,8 @@
+import LoadingSkeleton from '@/components/shared/LoadingSkeleton';
 import './globals.css';
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
-
-const inter = Inter({ subsets: ['latin'] });
+import { Suspense } from 'react';
+import Provider from '@/components/global/Provider';
 
 export const metadata: Metadata = {
   title: 'nsm-blogs',
@@ -16,7 +16,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang='en'>
-      <body className={inter.className}>{children}</body>
+      <Suspense fallback={<LoadingSkeleton />}>
+        <body>
+          <Provider>{children}</Provider>
+        </body>
+      </Suspense>
     </html>
   );
 }
